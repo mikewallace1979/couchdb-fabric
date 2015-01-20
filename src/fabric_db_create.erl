@@ -158,7 +158,7 @@ make_document([#shard{dbname=DbName}|_] = Shards, Suffix) ->
         {[[<<"add">>, Range, Node] | Raw], orddict:append(Node, Range, ByNode),
             orddict:append(Range, Node, ByRange)}
     end, {[], [], []}, Shards),
-    #doc{id=DbName, body = {[
+    #doc{id=mem3_util:db_doc_id(DbName), body = {[
         {<<"shard_suffix">>, Suffix},
         {<<"changelog">>, lists:sort(RawOut)},
         {<<"by_node">>, {[{K,lists:sort(V)} || {K,V} <- ByNodeOut]}},

@@ -20,7 +20,7 @@
 -include_lib("couch_mrview/include/couch_mrview.hrl").
 
 go(DbName, GroupId, View, Args, Callback, Acc0) when is_binary(GroupId) ->
-    {ok, DDoc} = fabric:open_doc(DbName, <<"_design/", GroupId/binary>>, []),
+    {ok, DDoc} = fabric:open_doc(DbName, <<"_design/", GroupId/binary>>, [Args#mrargs.doc_options]),
     go(DbName, DDoc, View, Args, Callback, Acc0);
 
 go(DbName, DDoc, View, Args, Callback, Acc) ->
